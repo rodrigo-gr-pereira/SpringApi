@@ -32,6 +32,19 @@ public class Controller {
     public void remover(@PathVariable(value = "codigo") int codigo){
         acao.deleteById(codigo);
     }
+    //Contador
+    @GetMapping("/api/contador")
+    public long contador(){
+        return acao.count();
+    }
+    @GetMapping("/api/ordenarNomes")
+    public List<Pessoa> ordenarNomes(){
+        return acao.findByOrderByNome();
+    }
+    @GetMapping("/api/ordenarNomes2")
+    public List<Pessoa> ordenarNomes2(){
+        return acao.findByNomeOrderByIdadeDesc("Rodrigo");
+    }
 
     @GetMapping("/")
     public  String mensagem(){
