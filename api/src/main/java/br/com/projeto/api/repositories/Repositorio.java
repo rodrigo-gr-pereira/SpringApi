@@ -12,5 +12,6 @@ public interface Repositorio extends JpaRepository<Pessoa, Integer> {
     List<Pessoa> findByCodigo(int codigo);
     List<Pessoa> findByOrderByNome();
     List<Pessoa> findByNomeOrderByIdadeDesc(String nome);
+    List<Pessoa> findByNomeContaining(String termo);
 
 }

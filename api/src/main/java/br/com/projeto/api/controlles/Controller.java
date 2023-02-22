@@ -45,6 +45,10 @@ public class Controller {
     public List<Pessoa> ordenarNomes2(){
         return acao.findByNomeOrderByIdadeDesc("Rodrigo");
     }
+    @GetMapping("/api/nomeContem")
+    public List<Pessoa> nomeContem(){
+        return acao.findByNomeContaining("a");
+    }
 
     @GetMapping("/")
     public  String mensagem(){
