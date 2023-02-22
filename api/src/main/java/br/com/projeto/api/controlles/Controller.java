@@ -3,7 +3,6 @@ package br.com.projeto.api.controlles;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositories.Repositorio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +11,21 @@ import java.util.List;
 public class Controller {
     @Autowired
     private Repositorio acao;
+
+    @GetMapping("/")
+    public  String mensagem(){
+        return  "Hello Word!";
+    }
+
+    @GetMapping("/boasVindas/{nome}")
+    public String boasVindas(@PathVariable String nome){
+        return "Seja bem vindo(a) " + nome;
+    }
+
+    @PostMapping ("/pessoa")
+    public Pessoa pessoa(@RequestBody Pessoa p){
+        return p;
+    }
     @PostMapping("/api")
     public Pessoa cadastar(@RequestBody Pessoa obj){
         return acao.save(obj);
@@ -50,18 +64,27 @@ public class Controller {
         return acao.findByNomeContaining("a");
     }
 
-    @GetMapping("/")
-    public  String mensagem(){
-        return  "Hello Word!";
+    @GetMapping("/api/iniciaCom")
+    public List<Pessoa> iniciaCom(){
+        return acao.findByNomeStartsWith("a");
+    }
+    @GetMapping("/api/terminaCom")
+    public List<Pessoa> terminaCom(){
+        return acao.findByNomeEndsWith("o");
     }
 
-    @GetMapping("/boasVindas/{nome}")
-        public String boasVindas(@PathVariable String nome){
-        return "Seja bem vindo(a) " + nome;
+    @GetMapping("/api/somaIdades")
+    public  int somaIdades(){
+        return acao.somaIdades();
+
+    }
+    @GetMapping("/api/idadeMaiorIgual")
+    public List<Pessoa> idadeMaiorIgual(){
+        return acao.idadeMaiorIgual(37);
+    }
+    @GetMapping("/status")
+    public String status(){
+        return  "Configurando status";
     }
 
-    @PostMapping ("/pessoa")
-    public Pessoa pessoa(@RequestBody Pessoa p){
-        return p;
-    }
 }
