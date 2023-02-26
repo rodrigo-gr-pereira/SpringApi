@@ -2,7 +2,10 @@ package br.com.projeto.api.controlles;
 
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositories.Repositorio;
+import br.com.projeto.api.services.Servico;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.List;
 public class Controller {
     @Autowired
     private Repositorio acao;
+
+    @Autowired
+    private Servico servico; // Classe objeto
 
     @GetMapping("/")
     public  String mensagem(){
@@ -27,20 +33,20 @@ public class Controller {
         return p;
     }
     @PostMapping("/api")
-    public Pessoa cadastar(@RequestBody Pessoa obj){
-        return acao.save(obj);
+    public ResponseEntity<?> cadastar(@RequestBody Pessoa obj){
+        return servico.cadastrar(obj);
     }
     @GetMapping("/api")
-    public List<Pessoa> selecionar(){
-        return acao.findAll();
+    public ResponseEntity<?> selecionar(){
+        return servico.selecionar();
     }
     @GetMapping("/api/{codigo}")
-    public List<Pessoa> selecionarPeloCodigo(@PathVariable int codigo){
-        return acao.findByCodigo(codigo);
+    public ResponseEntity<?> selecionarPeloCodigo(@PathVariable int codigo){
+        return servico.selecionarByCodigo(codigo);
     }
     @PutMapping("/api")
-    public Pessoa editar(@RequestBody Pessoa obj){
-        return acao.save(obj);
+    public ResponseEntity<?> editar(@RequestBody Pessoa obj){
+        return servico.editar(obj);
     }
     @DeleteMapping("/api/{codigo}")
     public void remover(@PathVariable(value = "codigo") int codigo){
@@ -83,8 +89,10 @@ public class Controller {
         return acao.idadeMaiorIgual(37);
     }
     @GetMapping("/status")
-    public String status(){
-        return  "Configurando status";
+    public ResponseEntity<?> status(){
+        return new ResponseEntity<>(HttpStatus.CREATED);
+  //  public String status(){
+    //    return  "Configurando status";
     }
 
 }

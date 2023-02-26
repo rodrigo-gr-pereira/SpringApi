@@ -23,4 +23,5 @@ public interface Repositorio extends JpaRepository<Pessoa, Integer> {
     @Query(value = "SELECT * FROM pessoas WHERE idade >= :idade", nativeQuery = true)
     List<Pessoa> idadeMaiorIgual(int idade);
 
+    int countByCodigo(int codigo);
 }
