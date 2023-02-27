@@ -49,8 +49,10 @@ public class Controller {
         return servico.editar(obj);
     }
     @DeleteMapping("/api/{codigo}")
-    public void remover(@PathVariable(value = "codigo") int codigo){
-        acao.deleteById(codigo);
+    //(value = "codigo")
+    public ResponseEntity<?>remover(@PathVariable int codigo){
+        return servico.remover(codigo);
+        // acao.deleteById(codigo);
     }
     //Contador
     @GetMapping("/api/contador")

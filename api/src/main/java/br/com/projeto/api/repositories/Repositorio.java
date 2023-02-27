@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface Repositorio extends JpaRepository<Pessoa, Integer> {
     List<Pessoa> findAll();
-    List<Pessoa> findByCodigo(int codigo);
+    Pessoa findByCodigo(int codigo);
     List<Pessoa> findByOrderByNome();
     List<Pessoa> findByNomeOrderByIdadeDesc(String nome);
     List<Pessoa> findByNomeContaining(String termo);
