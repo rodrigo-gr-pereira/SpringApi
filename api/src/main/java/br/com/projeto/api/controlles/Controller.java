@@ -1,9 +1,12 @@
 package br.com.projeto.api.controlles;
 
+import br.com.projeto.api.models.Cliente;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositories.Repositorio;
 import br.com.projeto.api.services.Servico;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -96,5 +99,8 @@ public class Controller {
   //  public String status(){
     //    return  "Configurando status";
     }
+    @PostMapping("/cliente")
+    public void cliente (@Valid @RequestBody Cliente obj) {
 
+    }
 }
